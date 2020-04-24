@@ -14,57 +14,54 @@ class JsonSchema {
     this.items,
   });
 
-  dynamic value(Map<String, dynamic> definitions) => '';
-  //_valueByJson(this, definitions);
+  dynamic value(Map<String, dynamic> definitions) =>
+      _valueByJson(this, definitions);
 
-  dynamic _valueByRef(String ref, Map<String, dynamic> definitions) {
-    final dynamic definition = definitions[ref];
-
-    return (definition != null) ? _valueByJson(definition, definitions) : '';
-  }
+  dynamic _valueByRef(String ref, Map<String, dynamic> definitions) =>
+      definitions.containsKey(ref)
+          ? _valueByJson(definitions[ref], definitions)
+          : '';
 
   dynamic _valueByJson(dynamic json, Map<String, dynamic> definitions) {
-    if (json.has('type')) {
+    if (json.type != null) {
       final String type = json.type;
 
       if (type == 'object') {
-        const dynamic result = {};
-        final dynamic properties = json.properties;
+        const Map<String, dynamic> result = <String, dynamic>{};
 
-        for (final String key in properties.keySet()) {
-          final dynamic object = properties.key;
+        /*for (final String key in json.properties) {
+          final dynamic object = json.properties.key;
           final Object value = _valueByJson(object, definitions);
           result['key'] = value;
-        }
+        }*/
 
         return result;
       } else if (type == 'string') {
-        if (json.has('example')) {
+        if (json.example != null) {
           return json.example;
         } else {
           return 'string';
         }
       } else if (type == 'integer') {
-        if (json.has('example')) {
+        if (json.example != null) {
           return json.example;
         } else {
           return '123';
         }
       } else if (type == 'number') {
-        if (json.has('example')) {
+        if (json.example != null) {
           return json.example;
         } else {
           return '12.34';
         }
       } else if (type == 'boolean') {
-        if (json.has('example')) {
+        if (json.example != null) {
           return json.example;
         } else {
           return 'true';
         }
       } else if (type == 'array') {
-        final dynamic items = json.items;
-        final dynamic value = _valueByJson(items, definitions);
+        final dynamic value = _valueByJson(json.items, definitions);
         final List<dynamic> array = <dynamic>[];
 
         array.add(value);
@@ -75,8 +72,8 @@ class JsonSchema {
       } else {
         return '';
       }
-    } else if (json.has('\$ref')) {
-      final String reference = ref(json.$re);
+    } else if (json.$ref != null) {
+      final String reference = ref(json.$ref);
 
       return _valueByRef(reference, definitions);
     } else {
@@ -84,9 +81,8 @@ class JsonSchema {
     }
   }
 
-  String ref(String value) {
-    return (value != null) ? value.replaceAll('#/definitions/', '') : '';
-  }
+  String ref(String value) =>
+      (value != null) ? value.replaceAll('#/definitions/', '') : '';
 
   static JsonSchema fromJson(Map<String, dynamic> json) =>
       _$JsonSchemaFromJson(json);
