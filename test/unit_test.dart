@@ -14,13 +14,13 @@ void main() {
     test('get pet', () async {
       final http.Response response = await get('/pet/123');
       expect(response.body,
-          '{\"id\":\"123\",\"category\":{\"id\":\"123\",\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\",\"string\",\"string\"],\"tags\":[{\"id\":\"123\",\"name\":\"string\"},{\"id\":\"123\",\"name\":\"string\"},{\"id\":\"123\",\"name\":\"string\"}],\"status\":\"string\"}');
+          '{id: 123, category: {id: 123, name: string}, name: doggie, photoUrls: [string, string, string], tags: [{id: 123, name: string}, {id: 123, name: string}, {id: 123, name: string}], status: string}');
     });
 
     test('find pet', () async {
       final http.Response response = await get('/pet/findByStatus');
       expect(response.body,
-          '{\"id\":\"123\",\"category\":{\"id\":\"123\",\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\",\"string\",\"string\"],\"tags\":[{\"id\":\"123\",\"name\":\"string\"},{\"id\":\"123\",\"name\":\"string\"},{\"id\":\"123\",\"name\":\"string\"}],\"status\":\"string\"}');
+          '[{id: 123, category: {id: 123, name: string}, name: doggie, photoUrls: [string, string, string], tags: [{id: 123, name: string}, {id: 123, name: string}, {id: 123, name: string}], status: string}, {id: 123, category: {id: 123, name: string}, name: doggie, photoUrls: [string, string, string], tags: [{id: 123, name: string}, {id: 123, name: string}, {id: 123, name: string}], status: string}, {id: 123, category: {id: 123, name: string}, name: doggie, photoUrls: [string, string, string], tags: [{id: 123, name: string}, {id: 123, name: string}, {id: 123, name: string}], status: string}]');
     });
 
     test('post pet', () async {
@@ -76,7 +76,8 @@ void main() {
 
     test('get user', () async {
       final http.Response response = await get('/user/john');
-      expect(response.body, 'xxx');
+      expect(response.body,
+          '{id: 123, username: string, firstName: string, lastName: string, email: string, password: string, phone: string, userStatus: 123}');
     });
 
     test('put user', () async {
@@ -94,10 +95,10 @@ void main() {
     setUp(() async {
       mockServer = await _mockServer();
     });
-    
+
     test('get inventory', () async {
       final http.Response response = await get('/store/inventory');
-      expect(response.body, 'xxx');
+      expect(response.body, '{id: 123, name: string}');
     });
 
     test('post order', () async {
@@ -107,7 +108,8 @@ void main() {
 
     test('get order', () async {
       final http.Response response = await get('/store/order/123');
-      expect(response.body, 'xxx');
+      expect(response.body,
+          '{id: 123, petId: 123, quantity: 123, shipDate: string, status: string, complete: true}');
     });
 
     test('delete order', () async {

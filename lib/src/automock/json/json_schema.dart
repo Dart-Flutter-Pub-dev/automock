@@ -25,7 +25,7 @@ class JsonSchema {
           : '';
 
   dynamic _valueByJson(JsonObject json, Definitions definitions) {
-    if (json.has('type')) {
+    if (json.has('type') && (json.get('type') != null)) {
       final String type = json.get('type');
 
       if (type == 'object') {
