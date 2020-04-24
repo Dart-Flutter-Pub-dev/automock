@@ -1,0 +1,13 @@
+name: automock
+description: An automatic mock server to speed up your initial development.
+version: 1.0.0
+author: Mauricio Togneri <mauricio.togneri@gmail.com>
+homepage: https://github.com/mauriciotogneri/automock
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dev_dependencies:
+  json_serializable: ^3.3.0
+  build_runner: ^1.8.1
+  test: ^1.14.2
