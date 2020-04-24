@@ -6,7 +6,7 @@ import 'package:test/test.dart';
 MockServer mockServer;
 
 void main() {
-  group('pets', () {
+  group('pet', () {
     setUp(() async {
       mockServer = await _mockServer();
     });
@@ -48,9 +48,13 @@ void main() {
     });
   });
 
-  group('users', () {
+  group('user', () {
     setUp(() async {
       mockServer = await _mockServer();
+    });
+
+    tearDown(() {
+      mockServer.stop();
     });
 
     test('post user', () async {
@@ -58,8 +62,68 @@ void main() {
       expect(response.statusCode, 204);
     });
 
-    test('post user', () async {
-      final http.Response response = await post('/user', '{}');
+    test('post user array', () async {
+      final http.Response response = await post('/user/createWithArray', '[]');
+      expect(response.statusCode, 204);
+    });
+
+    test('post user list', () async {
+      final http.Response response = await post('/user/createWithList', '[]');
+      expect(response.statusCode, 204);
+    });
+
+    test('login', () async {
+      final http.Response response = await get('/user/login');
+      expect(response.body, 'string');
+    });
+
+    test('logout', () async {
+      final http.Response response = await get('/user/logout');
+      expect(response.body, '');
+    });
+
+    test('get user', () async {
+      final http.Response response = await get('/user/john');
+      expect(response.body, 'xxx');
+    });
+
+    test('put user', () async {
+      final http.Response response = await put('/user/john', '[]');
+      expect(response.statusCode, 204);
+    });
+
+    test('delete user', () async {
+      final http.Response response = await delete('/user/john');
+      expect(response.statusCode, 204);
+    });
+  });
+
+  group('inventory', () {
+    setUp(() async {
+      mockServer = await _mockServer();
+    });
+
+    tearDown(() {
+      mockServer.stop();
+    });
+
+    test('get inventory', () async {
+      final http.Response response = await get('/store/inventory');
+      expect(response.body, 'xxx');
+    });
+
+    test('post order', () async {
+      final http.Response response = await post('/store/order', '{}');
+      expect(response.statusCode, 200);
+    });
+
+    test('get order', () async {
+      final http.Response response = await get('/store/order/123');
+      expect(response.body, 'xxx');
+    });
+
+    test('delete order', () async {
+      final http.Response response = await delete('/store/order/123');
       expect(response.statusCode, 204);
     });
   });
