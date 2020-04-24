@@ -1,3 +1,4 @@
+import 'package:automock/src/automock/definitions.dart';
 import 'package:automock/src/automock/json/json_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -37,7 +38,7 @@ class JsonEndPoint {
     return const <String, String>{};
   }
 
-  String schema(Map<String, dynamic> definitions) {
+  String schema(Definitions definitions) {
     if (responses != null) {
       final MapEntry<String, JsonResponse> defaultResponse = _defaultResponse();
 

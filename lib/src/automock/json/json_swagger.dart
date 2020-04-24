@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:automock/src/automock/definitions.dart';
 import 'package:automock/src/automock/end_point.dart';
 import 'package:automock/src/automock/json/json_end_point.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -19,6 +20,7 @@ class JsonSwagger {
 
   List<EndPoint> endPoints() {
     final List<EndPoint> endPoints = <EndPoint>[];
+    final Definitions def = Definitions.fromJson(definitions);
 
     for (final MapEntry<String, Map<String, JsonEndPoint>> pathEntry
         in paths.entries) {
@@ -36,7 +38,7 @@ class JsonSwagger {
               produces: jsonEndPoint.producesType(),
               responseCode: jsonEndPoint.responseCode(),
               headers: jsonEndPoint.headers(),
-              schema: jsonEndPoint.schema(definitions)),
+              schema: jsonEndPoint.schema(def)),
         );
       }
     }
