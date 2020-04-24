@@ -11,10 +11,6 @@ void main() {
       mockServer = await _mockServer();
     });
 
-    tearDown(() {
-      mockServer.stop();
-    });
-
     test('get pet', () async {
       final http.Response response = await get('/pet/123');
       expect(response.body,
@@ -51,10 +47,6 @@ void main() {
   group('user', () {
     setUp(() async {
       mockServer = await _mockServer();
-    });
-
-    tearDown(() {
-      mockServer.stop();
     });
 
     test('post user', () async {
@@ -102,11 +94,7 @@ void main() {
     setUp(() async {
       mockServer = await _mockServer();
     });
-
-    tearDown(() {
-      mockServer.stop();
-    });
-
+    
     test('get inventory', () async {
       final http.Response response = await get('/store/inventory');
       expect(response.body, 'xxx');
