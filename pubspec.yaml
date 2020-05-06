@@ -4,7 +4,7 @@ version: 1.0.1
 homepage: https://github.com/mauriciotogneri/automock
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.8.0 <3.0.0"
 
 dependencies:
   json_annotation: ^3.0.1
