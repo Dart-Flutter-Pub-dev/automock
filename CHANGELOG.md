@@ -5,3 +5,7 @@
 ## [1.0.1] - 2020-04-24
 
 * Fixed warnings
+
+## [1.0.2] - 2020-05-07
+
+* Fixed end point matching

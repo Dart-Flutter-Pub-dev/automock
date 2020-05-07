@@ -16,12 +16,12 @@ class EndPoint {
     this.responseCode,
     this.headers,
     this.schema,
-  }) : route = '^${path.replaceAll(RegExp('\\{.*\\}'), '[^\/]+')}\$';
+  }) : route = path.replaceAll(RegExp('\\{.*\\}'), '[^\/]+');
 
   bool get hasPathParameters => path != route;
 
   bool match(String method, String path) =>
-      (method == this.method) && RegExp(route).hasMatch(path);
+      (method == this.method) && RegExp('^$route\$').hasMatch(path);
 
   void fillResponse(HttpResponse response) {
     response.statusCode = responseCode;
