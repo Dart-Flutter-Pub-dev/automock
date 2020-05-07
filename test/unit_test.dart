@@ -40,7 +40,7 @@ void main() {
 
     test('post pet picture', () async {
       final http.Response response = await post('/pet/123/uploadImage', '{}');
-      expect(response.statusCode, 204);
+      expect(response.statusCode, 200);
     });
   });
 

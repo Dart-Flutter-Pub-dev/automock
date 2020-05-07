@@ -16,7 +16,7 @@ class EndPoint {
     this.responseCode,
     this.headers,
     this.schema,
-  }) : route = path.replaceAll(RegExp('\\{.*\\}'), '.*');
+  }) : route = '^${path.replaceAll(RegExp('\\{.*\\}'), '[^\/]+')}\$';
 
   bool get hasPathParameters => path != route;
 
