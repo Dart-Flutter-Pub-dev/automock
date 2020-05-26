@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:automock/src/automock/definitions.dart';
-import 'package:automock/src/automock/end_point.dart';
+import 'package:automock/src/automock/auto_end_point.dart';
 import 'package:automock/src/automock/json/json_end_point.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -18,8 +18,8 @@ class JsonSwagger {
     this.definitions = const <String, dynamic>{},
   });
 
-  List<EndPoint> endPoints() {
-    final List<EndPoint> endPoints = <EndPoint>[];
+  List<AutoEndPoint> endPoints() {
+    final List<AutoEndPoint> endPoints = <AutoEndPoint>[];
     final Definitions def = Definitions.fromJson(definitions);
 
     for (final MapEntry<String, Map<String, JsonEndPoint>> pathEntry
@@ -32,7 +32,7 @@ class JsonSwagger {
         final JsonEndPoint jsonEndPoint = endPointEntry.value;
 
         endPoints.add(
-          EndPoint(
+          AutoEndPoint(
               method: method.toUpperCase(),
               path: '$basePath$path',
               produces: jsonEndPoint.producesType(),

@@ -1,3 +1,3 @@
 library automock;
 
-export 'src/automock/mock_server.dart';
+export 'src/automock/automock.dart';

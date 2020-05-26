@@ -3,12 +3,12 @@ import 'package:http/http.dart' as http;
 import 'package:automock/automock.dart';
 import 'package:test/test.dart';
 
-MockServer mockServer;
+Automock automock;
 
 void main() {
   group('pet', () {
     setUp(() async {
-      mockServer = await _mockServer();
+      automock = await _automock();
     });
 
     test('get pet', () async {
@@ -46,7 +46,7 @@ void main() {
 
   group('user', () {
     setUp(() async {
-      mockServer = await _mockServer();
+      automock = await _automock();
     });
 
     test('post user', () async {
@@ -93,7 +93,7 @@ void main() {
 
   group('inventory', () {
     setUp(() async {
-      mockServer = await _mockServer();
+      automock = await _automock();
     });
 
     test('get inventory', () async {
@@ -131,14 +131,14 @@ Future<http.Response> delete(String path) => http.delete(url(path));
 
 String url(String path) => 'http://localhost:8080/v2$path';
 
-Future<MockServer> _mockServer() async {
-  if (mockServer == null) {
+Future<Automock> _automock() async {
+  if (automock == null) {
     final File file = File('example/swagger.json');
     final String swagger = await file.readAsString();
 
-    mockServer = MockServer(8080, swagger);
-    mockServer.start();
+    automock = Automock(8080, swagger);
+    automock.start();
   }
 
-  return mockServer;
+  return automock;
 }

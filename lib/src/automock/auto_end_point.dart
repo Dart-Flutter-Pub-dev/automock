@@ -1,29 +1,26 @@
 import 'dart:io';
+import 'package:mockserver/mockserver.dart';
 
-class EndPoint {
-  final String method;
-  final String path;
-  final String route;
+class AutoEndPoint extends EndPoint {
   final String produces;
   final int responseCode;
   final Map<String, String> headers;
   final String schema;
 
-  EndPoint({
-    this.method,
-    this.path,
+  AutoEndPoint({
+    String method,
+    String path,
     this.produces,
     this.responseCode,
     this.headers,
     this.schema,
-  }) : route = path.replaceAll(RegExp('\\{.*\\}'), '[^\/]+');
+  }) : super(
+          method: method,
+          path: path,
+        );
 
-  bool get hasPathParameters => path != route;
-
-  bool match(String method, String path) =>
-      (method == this.method) && RegExp('^$route\$').hasMatch(path);
-
-  void fillResponse(HttpResponse response) {
+  @override
+  void process(HttpRequest request, HttpResponse response) {
     response.statusCode = responseCode;
 
     if (produces != null) {
