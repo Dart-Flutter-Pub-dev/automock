@@ -5,18 +5,21 @@ import 'package:mockserver/mockserver.dart';
 class Automock {
   final int port;
   final String swaggerJson;
-  MockServer mockServer;
+  MockServer _mockServer;
 
-  Automock(this.port, this.swaggerJson);
+  Automock({
+    this.port,
+    this.swaggerJson,
+  });
 
   Future<dynamic> start() async {
     final JsonSwagger swagger = JsonSwagger.load(swaggerJson);
     final List<AutoEndPoint> endPoints = <AutoEndPoint>[];
     endPoints.addAll(swagger.endPoints());
 
-    mockServer = MockServer(port: port, endPoints: endPoints);
-    mockServer.start();
+    _mockServer = MockServer(port: port, endPoints: endPoints);
+    _mockServer.start();
   }
 
-  Future<dynamic> stop() => mockServer.stop();
+  Future<dynamic> stop() => _mockServer.stop();
 }

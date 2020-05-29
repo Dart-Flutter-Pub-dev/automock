@@ -136,7 +136,10 @@ Future<Automock> _automock() async {
     final File file = File('example/swagger.json');
     final String swagger = await file.readAsString();
 
-    automock = Automock(8080, swagger);
+    automock = Automock(
+      port: 8080,
+      swaggerJson: swagger,
+    );
     automock.start();
   }
 

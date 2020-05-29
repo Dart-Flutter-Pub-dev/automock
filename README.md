@@ -8,6 +8,9 @@ An automatic mock server to speed up your initial development.
 final File file = File('swagger.json');
 final String swagger = await file.readAsString();
 
-final Automock automock = Automock(8080, swagger);
+final Automock automock = Automock(
+  port: 8080,
+  swaggerJson: swagger,
+);
 await automock.start();
 ```
