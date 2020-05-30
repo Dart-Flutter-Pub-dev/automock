@@ -129,7 +129,9 @@ Future<http.Response> put(String path, dynamic body) =>
 
 Future<http.Response> delete(String path) => http.delete(url(path));
 
-String url(String path) => 'http://localhost:8080/v2$path';
+String url(String path) => 'http://localhost:$PORT/v2$path';
+
+const int PORT = 8080;
 
 Future<Automock> _automock() async {
   if (automock == null) {
@@ -137,7 +139,7 @@ Future<Automock> _automock() async {
     final String swagger = await file.readAsString();
 
     automock = Automock(
-      port: 8080,
+      port: PORT,
       swaggerJson: swagger,
     );
     automock.start();
