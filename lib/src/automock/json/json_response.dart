@@ -19,7 +19,7 @@ class JsonResponse {
     final Map<String, String> response = <String, String>{};
 
     if (headers != null) {
-      for (MapEntry<String, JsonHeader> header in headers.entries) {
+      for (final MapEntry<String, JsonHeader> header in headers.entries) {
         final JsonHeader jsonHeader = header.value;
         response[header.key] = jsonHeader.value;
       }

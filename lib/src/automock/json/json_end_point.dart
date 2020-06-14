@@ -50,7 +50,7 @@ class JsonEndPoint {
 
   MapEntry<String, JsonResponse> _defaultResponse() {
     if (responses != null) {
-      for (MapEntry<String, JsonResponse> entry in responses.entries) {
+      for (final MapEntry<String, JsonResponse> entry in responses.entries) {
         if (entry.key != 'default') {
           final int value = int.parse(entry.key);
 

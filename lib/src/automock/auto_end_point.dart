@@ -27,7 +27,7 @@ class AutoEndPoint extends EndPoint {
       response.headers.add('Content-Type', produces);
     }
 
-    for (MapEntry<String, String> entry in headers.entries) {
+    for (final MapEntry<String, String> entry in headers.entries) {
       response.headers.add(entry.key, entry.value);
     }
 
