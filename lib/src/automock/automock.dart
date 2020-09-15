@@ -18,7 +18,7 @@ class Automock {
     endPoints.addAll(swagger.endPoints());
 
     _mockServer = MockServer(port: port, endPoints: endPoints);
-    _mockServer.start();
+    await _mockServer.start();
   }
 
   Future<dynamic> stop() => _mockServer.stop();
