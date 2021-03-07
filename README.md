@@ -8,7 +8,7 @@ Add the following dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies: 
-  automock: ^1.3.0
+  automock: ^1.4.0
 ```
 
 ## Example

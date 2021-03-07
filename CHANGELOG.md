@@ -25,3 +25,7 @@
 ## [1.3.0] - 2020-09-15
 
 * Code cleanup
+
+## [1.4.0] - 2021-03-07
+
+* Added support for null safety
