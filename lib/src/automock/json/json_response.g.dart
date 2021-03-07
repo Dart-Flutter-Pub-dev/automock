@@ -8,9 +8,8 @@ part of 'json_response.dart';
 
 JsonResponse _$JsonResponseFromJson(Map<String, dynamic> json) {
   return JsonResponse(
-    headers: (json['headers'] as Map<String, dynamic>)?.map(
-      (k, e) => MapEntry(
-          k, e == null ? null : JsonHeader.fromJson(e as Map<String, dynamic>)),
+    headers: (json['headers'] as Map<String, dynamic>?)?.map(
+      (k, e) => MapEntry(k, JsonHeader.fromJson(e as Map<String, dynamic>)),
     ),
     schema: json['schema'] == null
         ? null

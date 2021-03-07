@@ -8,9 +8,9 @@ part 'json_swagger.g.dart';
 
 @JsonSerializable()
 class JsonSwagger {
-  final String basePath;
-  final Map<String, Map<String, JsonEndPoint>> paths;
-  final Map<String, dynamic> definitions;
+  final String? basePath;
+  final Map<String, Map<String, JsonEndPoint>>? paths;
+  final Map<String, dynamic>? definitions;
 
   const JsonSwagger({
     this.basePath = '',
@@ -20,10 +20,10 @@ class JsonSwagger {
 
   List<AutoEndPoint> endPoints() {
     final List<AutoEndPoint> endPoints = <AutoEndPoint>[];
-    final Definitions def = Definitions.fromJson(definitions);
+    final Definitions def = Definitions.fromJson(definitions!);
 
     for (final MapEntry<String, Map<String, JsonEndPoint>> pathEntry
-        in paths.entries) {
+        in paths!.entries) {
       final String path = pathEntry.key;
 
       for (final MapEntry<String, JsonEndPoint> endPointEntry

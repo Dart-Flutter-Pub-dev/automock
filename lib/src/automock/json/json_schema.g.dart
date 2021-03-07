@@ -8,8 +8,8 @@ part of 'json_schema.dart';
 
 JsonSchema _$JsonSchemaFromJson(Map<String, dynamic> json) {
   return JsonSchema(
-    type: json['type'] as String,
-    $ref: json[r'$ref'] as String,
+    type: json['type'] as String?,
+    $ref: json[r'$ref'] as String?,
     items: json['items'],
   );
 }

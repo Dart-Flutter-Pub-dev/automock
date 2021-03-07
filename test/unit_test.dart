@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:automock/automock.dart';
 import 'package:test/test.dart';
 
-Automock automock;
+Automock? automock;
 
 void main() {
   group('pet', () {
@@ -119,21 +119,21 @@ void main() {
   });
 }
 
-Future<http.Response> get(String path) => http.get(url(path));
+Future<http.Response> get(String path) => http.get(uri(path));
 
 Future<http.Response> post(String path, dynamic body) =>
-    http.post(url(path), body: body);
+    http.post(uri(path), body: body);
 
 Future<http.Response> put(String path, dynamic body) =>
-    http.put(url(path), body: body);
+    http.put(uri(path), body: body);
 
-Future<http.Response> delete(String path) => http.delete(url(path));
+Future<http.Response> delete(String path) => http.delete(uri(path));
 
-String url(String path) => 'http://localhost:$PORT/v2$path';
+Uri uri(String path) => Uri.parse('http://localhost:$PORT/v2$path');
 
 const int PORT = 8080;
 
-Future<Automock> _automock() async {
+Future<Automock?> _automock() async {
   if (automock == null) {
     final File file = File('example/swagger.json');
     final String swagger = await file.readAsString();
@@ -142,7 +142,7 @@ Future<Automock> _automock() async {
       port: PORT,
       swaggerJson: swagger,
     );
-    automock.start();
+    automock!.start();
   }
 
   return automock;

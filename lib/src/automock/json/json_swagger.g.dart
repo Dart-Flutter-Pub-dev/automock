@@ -8,19 +8,16 @@ part of 'json_swagger.dart';
 
 JsonSwagger _$JsonSwaggerFromJson(Map<String, dynamic> json) {
   return JsonSwagger(
-    basePath: json['basePath'] as String,
-    paths: (json['paths'] as Map<String, dynamic>)?.map(
+    basePath: json['basePath'] as String?,
+    paths: (json['paths'] as Map<String, dynamic>?)?.map(
       (k, e) => MapEntry(
           k,
-          (e as Map<String, dynamic>)?.map(
-            (k, e) => MapEntry(
-                k,
-                e == null
-                    ? null
-                    : JsonEndPoint.fromJson(e as Map<String, dynamic>)),
+          (e as Map<String, dynamic>).map(
+            (k, e) =>
+                MapEntry(k, JsonEndPoint.fromJson(e as Map<String, dynamic>)),
           )),
     ),
-    definitions: json['definitions'] as Map<String, dynamic>,
+    definitions: json['definitions'] as Map<String, dynamic>?,
   );
 }
 

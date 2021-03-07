@@ -9,7 +9,7 @@ class Definitions {
 
   bool has(String key) => json.containsKey(key);
 
-  JsonObject get(String key) => json[key];
+  JsonObject? get(String key) => json[key];
 
   static Definitions fromJson(Map<String, dynamic> json) {
     final Map<String, JsonObject> result = <String, JsonObject>{};

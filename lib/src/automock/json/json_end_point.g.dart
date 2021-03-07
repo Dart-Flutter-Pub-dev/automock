@@ -8,10 +8,10 @@ part of 'json_end_point.dart';
 
 JsonEndPoint _$JsonEndPointFromJson(Map<String, dynamic> json) {
   return JsonEndPoint(
-    produces: (json['produces'] as List)?.map((e) => e as String)?.toList(),
-    responses: (json['responses'] as Map<String, dynamic>)?.map(
-      (k, e) => MapEntry(k,
-          e == null ? null : JsonResponse.fromJson(e as Map<String, dynamic>)),
+    produces:
+        (json['produces'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    responses: (json['responses'] as Map<String, dynamic>?)?.map(
+      (k, e) => MapEntry(k, JsonResponse.fromJson(e as Map<String, dynamic>)),
     ),
   );
 }

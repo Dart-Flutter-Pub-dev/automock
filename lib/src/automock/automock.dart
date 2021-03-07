@@ -5,11 +5,11 @@ import 'package:mockserver/mockserver.dart';
 class Automock {
   final int port;
   final String swaggerJson;
-  MockServer _mockServer;
+  late MockServer _mockServer;
 
   Automock({
-    this.port,
-    this.swaggerJson,
+    required this.port,
+    required this.swaggerJson,
   });
 
   Future<dynamic> start() async {

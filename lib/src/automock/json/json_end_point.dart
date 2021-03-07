@@ -6,8 +6,8 @@ part 'json_end_point.g.dart';
 
 @JsonSerializable()
 class JsonEndPoint {
-  final List<String> produces;
-  final Map<String, JsonResponse> responses;
+  final List<String>? produces;
+  final Map<String, JsonResponse>? responses;
 
   const JsonEndPoint({
     this.produces = const <String>[],
@@ -15,7 +15,7 @@ class JsonEndPoint {
   });
 
   String producesType() {
-    return ((produces != null) && (produces.isNotEmpty)) ? produces[0] : '';
+    return ((produces != null) && (produces!.isNotEmpty)) ? produces![0] : '';
   }
 
   int responseCode() {
@@ -38,7 +38,7 @@ class JsonEndPoint {
     return const <String, String>{};
   }
 
-  String schema(Definitions definitions) {
+  String? schema(Definitions definitions) {
     if (responses != null) {
       final MapEntry<String, JsonResponse> defaultResponse = _defaultResponse();
 
@@ -50,7 +50,7 @@ class JsonEndPoint {
 
   MapEntry<String, JsonResponse> _defaultResponse() {
     if (responses != null) {
-      for (final MapEntry<String, JsonResponse> entry in responses.entries) {
+      for (final MapEntry<String, JsonResponse> entry in responses!.entries) {
         if (entry.key != 'default') {
           final int value = int.parse(entry.key);
 

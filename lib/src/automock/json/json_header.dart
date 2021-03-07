@@ -4,10 +4,10 @@ part 'json_header.g.dart';
 
 @JsonSerializable()
 class JsonHeader {
-  final String type;
-  final String format;
+  final String? type;
+  final String? format;
   @JsonKey(name: 'default')
-  final String defaultValue;
+  final String? defaultValue;
 
   const JsonHeader({
     this.type = '',

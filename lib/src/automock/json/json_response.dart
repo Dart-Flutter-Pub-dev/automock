@@ -7,8 +7,8 @@ part 'json_response.g.dart';
 
 @JsonSerializable()
 class JsonResponse {
-  final Map<String, JsonHeader> headers;
-  final JsonSchema schema;
+  final Map<String, JsonHeader>? headers;
+  final JsonSchema? schema;
 
   const JsonResponse({
     this.headers = const <String, JsonHeader>{},
@@ -19,7 +19,7 @@ class JsonResponse {
     final Map<String, String> response = <String, String>{};
 
     if (headers != null) {
-      for (final MapEntry<String, JsonHeader> header in headers.entries) {
+      for (final MapEntry<String, JsonHeader> header in headers!.entries) {
         final JsonHeader jsonHeader = header.value;
         response[header.key] = jsonHeader.value;
       }
@@ -28,8 +28,8 @@ class JsonResponse {
     return response;
   }
 
-  String getSchema(Definitions definitions) =>
-      (schema != null) ? schema.value(definitions).toString() : null;
+  String? getSchema(Definitions definitions) =>
+      (schema != null) ? schema!.value(definitions).toString() : null;
 
   static JsonResponse fromJson(Map<String, dynamic> json) =>
       _$JsonResponseFromJson(json);

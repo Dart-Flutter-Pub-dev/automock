@@ -8,9 +8,9 @@ part of 'json_header.dart';
 
 JsonHeader _$JsonHeaderFromJson(Map<String, dynamic> json) {
   return JsonHeader(
-    type: json['type'] as String,
-    format: json['format'] as String,
-    defaultValue: json['default'] as String,
+    type: json['type'] as String?,
+    format: json['format'] as String?,
+    defaultValue: json['default'] as String?,
   );
 }
 

@@ -6,8 +6,8 @@ part 'json_schema.g.dart';
 
 @JsonSerializable()
 class JsonSchema {
-  final String type;
-  final String $ref;
+  final String? type;
+  final String? $ref;
   final dynamic items;
 
   const JsonSchema({
@@ -21,12 +21,12 @@ class JsonSchema {
 
   dynamic _valueByRef(String ref, Definitions definitions) =>
       definitions.has(ref)
-          ? _valueByJson(definitions.get(ref), definitions)
+          ? _valueByJson(definitions.get(ref)!, definitions)
           : '';
 
   dynamic _valueByJson(JsonObject json, Definitions definitions) {
     if (json.has('type') && (json.get('type') != null)) {
-      final String type = json.get('type');
+      final String? type = json.get('type');
 
       if (type == 'object') {
         final Map<String, dynamic> result = <String, dynamic>{};
@@ -34,7 +34,7 @@ class JsonSchema {
 
         for (final String key in properties.keys) {
           final dynamic object = properties[key];
-          final Object value =
+          final Object? value =
               _valueByJson(JsonObject.fromObject(object), definitions);
 
           result[key] = value;
@@ -87,7 +87,7 @@ class JsonSchema {
     }
   }
 
-  String ref(String value) =>
+  String ref(String? value) =>
       (value != null) ? value.replaceAll('#/definitions/', '') : '';
 
   static JsonSchema fromJson(Map<String, dynamic> json) =>
